@@ -4,6 +4,10 @@ import christmas.verification.Verification;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import christmas.utility.Utility;
+import christmas.model.Order;
+
+import java.util.List;
+import java.util.ArrayList;
 
 public class Controller {
     public Controller() {
@@ -28,10 +32,15 @@ public class Controller {
         while(true) {
             try {
                 String orderInput = InputView.readOrder();
-
+                // verify
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e.getMessage());
             }
         }
+    }
+
+    public List<Order> makeOrderList(String orderInput) {
+        String[] orders = orderInput.split(",");
+
     }
 }
