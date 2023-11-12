@@ -7,7 +7,7 @@ public class Order {
     public Order(String order) {
         String[] nameAndNum = order.split("-");
         if(nameAndNum.length != 2) {
-우
+
         }
         this.name = name;
         this.number = number;
