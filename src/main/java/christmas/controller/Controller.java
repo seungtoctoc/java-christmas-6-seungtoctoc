@@ -42,5 +42,9 @@ public class Controller {
     public List<Order> makeOrderList(String orderInput) {
         String[] orders = orderInput.split(",");
 
+        for (String order : orders) {
+            String[] nameAndNum = order.split("-");
+
+        }
     }
 }
