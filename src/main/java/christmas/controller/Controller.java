@@ -28,11 +28,11 @@ public class Controller {
         }
     }
 
-    public String readOrder() {
+    public List<Order> readOrder() {
         while(true) {
             try {
                 String orderInput = InputView.readOrder();
-                // verify
+                return makeOrderList(orderInput);
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e.getMessage());
             }
@@ -43,7 +43,6 @@ public class Controller {
         String[] orders = orderInput.split(",");
 
         for (String order : orders) {
-            String[] nameAndNum = order.split("-");
 
         }
     }
