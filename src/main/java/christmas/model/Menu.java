@@ -27,7 +27,7 @@ public enum Menu {
         this.price = price;
     }
 
-    public Menu[] getMenuArray() {
+    public static Menu[] getMenuArray() {
         return Menu.values();
     }
 }

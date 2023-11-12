@@ -1,15 +1,28 @@
 package christmas.model;
 
+import christmas.model.Menu;
+import christmas.view.ErrorView;
+
 public class Order {
     private String name;
     private int number;
 
     public Order(String order) {
-        String[] nameAndNum = order.split("-");
-        if(nameAndNum.length != 2) {
+        String[] nameAndNumber = order.split("-");
 
+        this.name = nameAndNumber[0];
+        this.number = nameAndNumber[1];
+    }
+
+    public void verifyName(String name) {
+        try {
+            Menu.valueOf(name);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(ErrorView.getTypeErrorMessage());
         }
-        this.name = name;
-        this.number = number;
+    }
+
+    public void verifyNumber() {
+        
     }
 }
