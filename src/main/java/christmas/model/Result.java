@@ -9,12 +9,14 @@ public class Result {
     static final int GET_PRESENT_PRICE = 120_000;
     static final int FIRST_CHRISTMAS_DISCOUNT_PRICE = 1_000;
     static final int DAILY_INCREASE_DISCOUNT_PRICE = 1_00;
+    static final int DAYS_OF_WEEK = 7;
 
     private List<Order> orders;
     private int originalPrice;
     private boolean getPresent;
-    private int dDayBenefit;
-    private int weekdayBenefit;
+    private int christmasBenefit;
+    boolean isWeekEnd;
+    private int dayBenefit;
     private int specialBenefit;
 
     private int presentBenefit;
@@ -25,7 +27,9 @@ public class Result {
         this.orders = orders;
         this.originalPrice = getOriginalPrice(orders);
         this.getPresent = canGetPresent(this.originalPrice);
-        this.dDayBenefit = getDDayBenefit(visitDate);
+        this.christmasBenefit = getChristmasBenefit(visitDate);
+        this.isWeekEnd = isWeekEnd(visitDate);
+        this.dayBenefit = getDayBenefit(this.isWeekEnd, orders);
 
     }
 
@@ -47,7 +51,7 @@ public class Result {
         return false;
     }
 
-    private int getDDayBenefit(int visitDate) {
+    private int getChristmasBenefit(int visitDate) {
         if(visitDate > 25) {
             return 0;
         }
@@ -55,7 +59,39 @@ public class Result {
         return discountPrice;
     }
 
-    private int getWeekdayBenefit(int visitDate) {
-        return 0;
+    private int countCategory(List<Order> orders, String category) {
+        int count = 0;
+
+        for(Order order : orders) {
+            String currentName = order.getName();
+            String currentCategory = Menu.getCategory(currentName);
+
+            if(currentCategory == category) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    private boolean isWeekEnd(int visitDate) {
+        int rest = visitDate % DAYS_OF_WEEK;
+
+        if(rest == 1  || rest == 2) {
+            return true;
+        }
+        return false;
+    }
+
+    private int getDayBenefit(boolean isWeekEnd, List<Order> orders) {
+        int count;
+        
+        if(isWeekEnd == true) {
+            count = countCategory(orders, "메인");
+            return 2023 * count;
+        }
+
+        count = countCategory(orders, "디저트");
+        return 2023 * count;
     }
 }

@@ -1,5 +1,7 @@
 package christmas.model;
 
+import java.util.List;
+
 public enum Menu {
     APPETIZER1("양송이수프", "에피타이저", 6_000),
     APPETIZER2("타파스", "에피타이저", 5_500),
@@ -45,5 +47,16 @@ public enum Menu {
             }
         }
         return 0;
+    }
+
+    public static String getCategory(String name) {
+        for (Menu menu : Menu.values()) {
+            String currentName = menu.name;
+
+            if(currentName.equals(name)){
+                return menu.category;
+            }
+        }
+        return "";
     }
 }
