@@ -27,7 +27,14 @@ public enum Menu {
         this.price = price;
     }
 
-    public static Menu[] getMenuArray() {
-        return Menu.values();
+    public static boolean isInMenu(String name) {
+        for (Menu menu : Menu.values()) {
+            String currentName = menu.name;
+
+            if(currentName.equals(name)){
+                return true;
+            }
+        }
+        return false;
     }
 }
