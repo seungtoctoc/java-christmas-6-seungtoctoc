@@ -16,7 +16,7 @@ public class Utility {
 
     public static String getFormattedNumber(int number) {
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
-        String formattedNumber = decimalFormat.format(number);
+        String formattedNumber = decimalFormat.format(number) + "원";
         return formattedNumber;
     }
 }

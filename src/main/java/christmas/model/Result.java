@@ -28,7 +28,7 @@ public class Result {
     private int dayBenefit = NO_BENEFIT;
     private int specialBenefit = NO_BENEFIT;
 
-    private int discountPrice = NO_BENEFIT;
+    private int totalDiscount = NO_BENEFIT;
     private int paymentPrice;
     private String badge;
 
@@ -48,11 +48,11 @@ public class Result {
 
             this.specialBenefit = calculateSpecialBenefit(visitDate);
 
-            this.discountPrice = this.champagneBenefit + this.christmasBenefit + this.dayBenefit + this.specialBenefit;
+            this.totalDiscount = this.champagneBenefit + this.christmasBenefit + this.dayBenefit + this.specialBenefit;
         }
 
-        this.paymentPrice = this.originalPrice - this.discountPrice + this.champagneBenefit;
-        this.badge = calculateBadge(this.discountPrice);
+        this.paymentPrice = this.originalPrice - this.totalDiscount + this.champagneBenefit;
+        this.badge = calculateBadge(this.totalDiscount);
     }
 
     private int calculateOriginalPrice(List<Order> orders) {
@@ -177,8 +177,8 @@ public class Result {
         return specialBenefit;
     }
 
-    public int getDiscountPrice() {
-        return discountPrice;
+    public int getTotalDiscount() {
+        return totalDiscount;
     }
 
     public int getPaymentPrice() {
@@ -187,5 +187,9 @@ public class Result {
 
     public String getBadge() {
         return badge;
+    }
+
+    public boolean isWeekEnd() {
+        return isWeekEnd;
     }
 }

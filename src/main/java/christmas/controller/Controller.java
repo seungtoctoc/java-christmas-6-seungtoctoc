@@ -18,6 +18,7 @@ public class Controller {
 
         Result result = new Result(visitDate, orders);
 
+        OutputView.printResult(result);
     }
 
     private int readVisitDate() {
