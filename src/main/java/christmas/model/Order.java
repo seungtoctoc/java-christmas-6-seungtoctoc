@@ -1,7 +1,7 @@
 package christmas.model;
 
-import christmas.model.Menu;
-import christmas.view.ErrorView;
+import christmas.verification.ErrorMessage;
+import christmas.verification.Verification;
 
 public class Order {
     private String name;
@@ -18,11 +18,11 @@ public class Order {
         try {
             Menu.valueOf(name);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(ErrorView.getTypeErrorMessage());
+            throw new IllegalArgumentException(ErrorMessage.getOrderErrorMessage());
         }
     }
 
     public void verifyNumber() {
-        
+
     }
 }
