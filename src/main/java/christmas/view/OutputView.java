@@ -42,7 +42,7 @@ public class OutputView {
     }
 
     public static void printOriginalPrice(Result result) {
-        System.out.println("\n<할인 전 총 주문 금액>");
+        System.out.println("\n<할인 전 총주문 금액>");
 
         int originalPrice = result.getOriginalPrice();
         String formattedNumber = Utility.getFormattedNumber(originalPrice);
@@ -112,7 +112,7 @@ public class OutputView {
     }
 
     public static void printTotalDiscount(Result result) {
-        System.out.println("\n<총 혜택 금액>");
+        System.out.println("\n<총혜택 금액>");
 
         int totalDiscount = result.getTotalDiscount();
         String formattedTotalDiscount = Utility.getFormattedNumber(totalDiscount);

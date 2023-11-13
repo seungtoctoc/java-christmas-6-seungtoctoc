@@ -3,6 +3,7 @@ package christmas.controller;
 import christmas.model.Order;
 import christmas.model.Result;
 import christmas.utility.Utility;
+import christmas.verification.ErrorMessage;
 import christmas.verification.Verification;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -30,7 +31,7 @@ public class Controller {
                 Verification.verifyDate(visitDate);
                 return visitDate;
             } catch (IllegalArgumentException e) {
-                OutputView.printErrorMessage(e.getMessage());
+                OutputView.printErrorMessage(ErrorMessage.getDateErrorMessage());
             }
         }
     }
@@ -44,7 +45,7 @@ public class Controller {
                 Verification.verifyOrders(orders);
                 return orders;
             } catch (IllegalArgumentException e) {
-                OutputView.printErrorMessage(e.getMessage());
+                OutputView.printErrorMessage(ErrorMessage.getOrderErrorMessage());
             }
         }
     }

@@ -10,7 +10,7 @@ public class Utility {
             return Integer.parseInt(input);
         }
         catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.getNumberErrorMessage());
+            throw new IllegalArgumentException();
         }
     }
 

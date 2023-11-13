@@ -12,7 +12,7 @@ public class Verification {
 
     public static void verifyDate(int date) {
         if(date < FIRST_DATE || date > LAST_DATE) {
-            throw new IllegalArgumentException(ErrorMessage.getDateErrorMessage());
+            throw new IllegalArgumentException();
         }
     }
 
@@ -24,7 +24,7 @@ public class Verification {
         }
 
         if (totalQuantity > MAX_QUANTITY) {
-            throw new IllegalArgumentException(ErrorMessage.getQuantityErrorMessage());
+            throw new IllegalArgumentException();
         }
     }
 
@@ -37,7 +37,7 @@ public class Verification {
                 return;
             }
         }
-        throw new IllegalArgumentException(ErrorMessage.getCategoryErrorMessage());
+        throw new IllegalArgumentException();
     }
 
     public static void verifyOrders(List<Order> orders) {
