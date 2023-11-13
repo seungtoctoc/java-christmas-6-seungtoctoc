@@ -15,9 +15,7 @@ public class Order {
     }
 
     public void verifyName(String name) {
-        try {
-            Menu.valueOf(name);
-        } catch (IllegalArgumentException e) {
+        if(Menu.isInMenu(name) == false) {
             throw new IllegalArgumentException(ErrorMessage.getOrderErrorMessage());
         }
     }
