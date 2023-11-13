@@ -19,8 +19,19 @@ public class Result {
 
     public Result(List<Order> orders) {
         this.orders = orders;
+        this.originalPrice = getOriginalPrice(orders);
 
+    }
 
+    private int getOriginalPrice(List<Order> orders) {
+        int originalPrice = 0;
+
+        for(Order order : orders) {
+            String menuName = order.getName();
+            originalPrice += Menu.getPrice(menuName);
+        }
+
+        return originalPrice;
     }
 
 }

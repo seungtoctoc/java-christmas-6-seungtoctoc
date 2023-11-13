@@ -35,4 +35,15 @@ public enum Menu {
         }
         return false;
     }
+
+    public static int getPrice(String name) {
+        for (Menu menu : Menu.values()) {
+            String currentName = menu.name;
+
+            if(currentName.equals(name)){
+                return menu.price;
+            }
+        }
+        return 0;
+    }
 }

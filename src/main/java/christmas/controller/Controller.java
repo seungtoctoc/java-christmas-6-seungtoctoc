@@ -26,7 +26,7 @@ public class Controller {
 
     }
 
-    public int readVisitDate() {
+    private int readVisitDate() {
         while(true) {
             try {
                 String visitDateInput = InputView.readVisitDate();
@@ -39,7 +39,7 @@ public class Controller {
         }
     }
 
-    public List<Order> readOrder() {
+    private List<Order> readOrder() {
         while(true) {
             try {
                 String orderInput = InputView.readOrder();
@@ -50,7 +50,7 @@ public class Controller {
         }
     }
 
-    public List<Order> makeOrderList(String orderInput) {
+    private List<Order> makeOrderList(String orderInput) {
         String[] splitOrders = orderInput.split(",");
         List<Order> orders = new ArrayList<>();
 

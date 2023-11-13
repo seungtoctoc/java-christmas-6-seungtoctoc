@@ -16,13 +16,13 @@ public class Order {
         this.number = Utility.getNumberFromString(nameAndNumber[1]);
     }
 
-    public void verifyName(String name) {
+    private void verifyName(String name) {
         if(Menu.isInMenu(name) == false) {
             throw new IllegalArgumentException();
         }
     }
 
-    public void verifyLength(String[] nameAndNumber) {
+    private void verifyLength(String[] nameAndNumber) {
         if(nameAndNumber.length != 2) {
             throw new IllegalArgumentException();
         }
