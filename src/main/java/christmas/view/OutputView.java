@@ -27,11 +27,11 @@ public class OutputView {
 
     public static void printVisitDate(Result result) {
         int visitDate = result.getVisitDate();
-        System.out.println("12월 " + visitDate + "일 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n");
+        System.out.println("\n12월 " + visitDate + "일 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
     }
 
     public static void printMenu(Result result) {
-        System.out.println("<주문 메뉴>");
+        System.out.println("\n<주문 메뉴>");
 
         List<Order> orders = result.getOrders();
         for (Order order : orders) {
@@ -43,7 +43,7 @@ public class OutputView {
     }
 
     public static void printOriginalPrice(Result result) {
-        System.out.println("<할인 전 총 주문 금액>");
+        System.out.println("\n<할인 전 총 주문 금액>");
 
         int originalPrice = result.getOriginalPrice();
         String formattedNumber = Utility.getFormattedNumber(originalPrice);
@@ -51,7 +51,7 @@ public class OutputView {
     }
 
     public static void printChampagne(Result result) {
-        System.out.println("<증정 메뉴>");
+        System.out.println("\n<증정 메뉴>");
 
         boolean isGetChampagne = result.isGetChampagne();
         if(isGetChampagne) {
@@ -99,7 +99,7 @@ public class OutputView {
     }
 
     public static void printBenefits(Result result) {
-        System.out.println("<혜택 내역>");
+        System.out.println("\n<혜택 내역>");
 
         int totalDiscount = result.getTotalDiscount();
         if (totalDiscount == 0) {
@@ -114,7 +114,7 @@ public class OutputView {
     }
 
     public static void printTotalDiscount(Result result) {
-        System.out.println("<총 혜택 금액>");
+        System.out.println("\n<총 혜택 금액>");
 
         int totalDiscount = result.getTotalDiscount();
         String formattedTotalDiscount = Utility.getFormattedNumber(totalDiscount);
@@ -122,7 +122,7 @@ public class OutputView {
     }
 
     public static void printPaymentPrice(Result result) {
-        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.println("\n<할인 후 예상 결제 금액>");
 
         int paymentPrice = result.getPaymentPrice();
         String formattedPaymentPrice = Utility.getFormattedNumber(paymentPrice);
@@ -130,7 +130,7 @@ public class OutputView {
     }
 
     public static void printBadge(Result result) {
-        System.out.println("<12월 이벤트 배지>");
+        System.out.println("\n<12월 이벤트 배지>");
 
         String badge = result.getBadge();
         System.out.println(badge);

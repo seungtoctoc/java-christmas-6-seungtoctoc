@@ -60,7 +60,10 @@ public class Result {
 
         for (Order order : orders) {
             String menuName = order.getName();
-            originalPrice += Menu.getPrice(menuName);
+            int number = order.getNumber();
+            int price = Menu.getPrice(menuName);
+
+            originalPrice += price * number;
         }
 
         return originalPrice;
@@ -93,10 +96,11 @@ public class Result {
 
         for (Order order : orders) {
             String currentName = order.getName();
-            String currentCategory = Menu.getCategory(currentName);
+            int currentNumber = order.getNumber();
 
+            String currentCategory = Menu.getCategory(currentName);
             if (currentCategory == category) {
-                count++;
+                count += currentNumber;
             }
         }
         return count;
