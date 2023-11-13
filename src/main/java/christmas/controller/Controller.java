@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.verification.ErrorMessage;
 import christmas.verification.Verification;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -12,7 +13,17 @@ import java.util.ArrayList;
 public class Controller {
     public Controller() {
         InputView.printStart();
-        readVisitDate();
+        int visitDate = readVisitDate();
+        List<Order> orders = readOrder();
+
+        
+        System.out.println(visitDate);
+
+        for(Order order : orders) {
+            System.out.println(order.getName() + " - " +order.getNumber());
+        }
+
+
     }
 
     public int readVisitDate() {
@@ -23,7 +34,7 @@ public class Controller {
                 Verification.verifyDate(visitDate);
                 return visitDate;
             } catch (IllegalArgumentException e) {
-                OutputView.printErrorMessage(e.getMessage());
+                OutputView.printErrorMessage(ErrorMessage.getDateErrorMessage());
             }
         }
     }
@@ -34,16 +45,20 @@ public class Controller {
                 String orderInput = InputView.readOrder();
                 return makeOrderList(orderInput);
             } catch (IllegalArgumentException e) {
-                OutputView.printErrorMessage(e.getMessage());
+                OutputView.printErrorMessage(ErrorMessage.getOrderErrorMessage());
             }
         }
     }
 
     public List<Order> makeOrderList(String orderInput) {
-        String[] orders = orderInput.split(",");
+        String[] splitOrders = orderInput.split(",");
+        List<Order> orders = new ArrayList<>();
 
-        for (String order : orders) {
-
+        for (String order : splitOrders) {
+            Order currentOrder = new Order(order);
+            orders.add(currentOrder);
         }
+
+        return orders;
     }
 }
