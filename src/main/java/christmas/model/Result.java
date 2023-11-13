@@ -25,7 +25,8 @@ public class Result {
         this.orders = orders;
         this.originalPrice = getOriginalPrice(orders);
         this.getPresent = canGetPresent(this.originalPrice);
-        this.dDayBenefit = getdDayBenefit(visitDate)
+        this.dDayBenefit = getDDayBenefit(visitDate);
+
     }
 
     private int getOriginalPrice(List<Order> orders) {
@@ -39,15 +40,22 @@ public class Result {
         return originalPrice;
     }
 
-    private boolean canGetPresent (int originalPrice) {
+    private boolean canGetPresent(int originalPrice) {
         if (originalPrice >= GET_PRESENT_PRICE) {
             return true;
         }
         return false;
     }
 
-    private int getdDayBenefit (int visitDate) {
+    private int getDDayBenefit(int visitDate) {
+        if(visitDate > 25) {
+            return 0;
+        }
         int discountPrice = FIRST_CHRISTMAS_DISCOUNT_PRICE + DAILY_INCREASE_DISCOUNT_PRICE * (visitDate - 1);
         return discountPrice;
+    }
+
+    private int getWeekdayBenefit(int visitDate) {
+        return 0;
     }
 }
