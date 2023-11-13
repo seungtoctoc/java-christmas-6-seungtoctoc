@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Controller {
     public Controller() {
-        InputView.printStart();
+        OutputView.printStart();
 
         int visitDate = readVisitDate();
         List<Order> orders = readOrder();
