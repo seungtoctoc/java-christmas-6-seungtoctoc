@@ -21,7 +21,7 @@ public enum Menu {
     private String category;
     private int price;
 
-    private Menu (String name, String category, int price) {
+    private Menu(String name, String category, int price) {
         this.name = name;
         this.category = category;
         this.price = price;
@@ -31,7 +31,7 @@ public enum Menu {
         for (Menu menu : Menu.values()) {
             String currentName = menu.name;
 
-            if(currentName.equals(name)){
+            if (currentName.equals(name)){
                 return true;
             }
         }
@@ -42,7 +42,7 @@ public enum Menu {
         for (Menu menu : Menu.values()) {
             String currentName = menu.name;
 
-            if(currentName.equals(name)){
+            if (currentName.equals(name)){
                 return menu.price;
             }
         }
@@ -53,7 +53,7 @@ public enum Menu {
         for (Menu menu : Menu.values()) {
             String currentName = menu.name;
 
-            if(currentName.equals(name)){
+            if (currentName.equals(name)){
                 return menu.category;
             }
         }

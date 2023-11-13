@@ -17,13 +17,13 @@ public class Order {
     }
 
     private void verifyName(String name) {
-        if(Menu.isInMenu(name) == false) {
+        if (Menu.isInMenu(name) == false) {
             throw new IllegalArgumentException();
         }
     }
 
     private void verifyLength(String[] nameAndNumber) {
-        if(nameAndNumber.length != 2) {
+        if (nameAndNumber.length != 2) {
             throw new IllegalArgumentException();
         }
     }

@@ -27,7 +27,7 @@ public class Controller {
     }
 
     private int readVisitDate() {
-        while(true) {
+        while (true) {
             try {
                 String visitDateInput = InputView.readVisitDate();
                 int visitDate = Utility.getNumberFromString(visitDateInput);
@@ -40,7 +40,7 @@ public class Controller {
     }
 
     private List<Order> readOrder() {
-        while(true) {
+        while (true) {
             try {
                 String orderInput = InputView.readOrder();
                 return makeOrderList(orderInput);
