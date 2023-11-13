@@ -1,9 +1,8 @@
 package christmas.view;
 
-import christmas.model.Result;
 import christmas.model.Order;
+import christmas.model.Result;
 import christmas.utility.Utility;
-import jdk.jshell.execution.Util;
 
 import java.util.List;
 
@@ -61,6 +60,20 @@ public class OutputView {
         System.out.println("없음");
     }
 
+    public static void printBenefits(Result result) {
+        System.out.println("\n<혜택 내역>");
+
+        int totalDiscount = result.getTotalDiscount();
+        if (totalDiscount == 0) {
+            System.out.println("없음");
+            return;
+        }
+        printChristmasBenefit(result);
+        printDayBenefit(result);
+        printSpecialBenefit(result);
+        printChampagneBenefit(result);
+    }
+
     public static void printChristmasBenefit(Result result) {
         int christmasBenefit = result.getChristmasBenefit();
 
@@ -71,10 +84,10 @@ public class OutputView {
     }
 
     public static void printDayBenefit(Result result) {
-        boolean isWeekEnd = result.isWeekEnd();
         int dayBenefit = result.getDayBenefit();
         String formattedDayBenefit = Utility.getFormattedNumber(dayBenefit);
 
+        boolean isWeekEnd = result.isWeekEnd();
         if (isWeekEnd) {
             System.out.println("주말 할인: -" + formattedDayBenefit);
             return;
@@ -84,33 +97,18 @@ public class OutputView {
 
     public static void printSpecialBenefit(Result result) {
         int specialBenefit = result.getSpecialBenefit();
-        String formattedSpecialBenefit = Utility.getFormattedNumber(specialBenefit);
         if(specialBenefit > NO_BENEFIT) {
+            String formattedSpecialBenefit = Utility.getFormattedNumber(specialBenefit);
             System.out.println("특별 할인: -" + formattedSpecialBenefit);
         }
     }
 
     public static void printChampagneBenefit(Result result) {
         int champagneBenefit = result.getChampagneBenefit();
-        String formattedChampagneBenefit = Utility.getFormattedNumber(champagneBenefit);
         if(champagneBenefit > NO_BENEFIT) {
+            String formattedChampagneBenefit = Utility.getFormattedNumber(champagneBenefit);
             System.out.println("증정 이벤트: -" + formattedChampagneBenefit);
         }
-    }
-
-    public static void printBenefits(Result result) {
-        System.out.println("\n<혜택 내역>");
-
-        int totalDiscount = result.getTotalDiscount();
-        if (totalDiscount == 0) {
-            System.out.println("없음");
-            return;
-        }
-
-        printChristmasBenefit(result);
-        printDayBenefit(result);
-        printSpecialBenefit(result);
-        printChampagneBenefit(result);
     }
 
     public static void printTotalDiscount(Result result) {

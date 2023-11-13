@@ -3,32 +3,42 @@ package christmas.model;
 import java.util.List;
 
 public class Result {
-    static final int GET_PRESENT_PRICE = 120_000;
-    static final int FIRST_CHRISTMAS_DISCOUNT_PRICE = 1_000;
-    static final int DAILY_INCREASE_DISCOUNT_PRICE = 1_00;
-    static final int DAYS_OF_WEEK = 7;
+    public enum Price {
+        APPLY_EVENT(10_000),
+        NO_BENEFIT(0),
+        GET_PRESENT(120_000),
+        CHAMPAGNE(25_000),
+        FIRST_CHRISTMAS_DISCOUNT(1_000),
+        DAILY_INCREASE_DISCOUNT(100),
+        SPECIAL_DISCOUNT(1_000),
+        SANTA_BADGE(20_000),
+        TREE_BADGE(10_000),
+        STAR_BADGE(5_000);
+
+        private int price;
+
+        Price(int price) {
+            this.price = price;
+        }
+        public int getPrice() {
+            return price;
+        }
+    }
     static final int THIS_YEAR = 2023;
     static final int CHRISTMAS_DAY = 25;
+    static final int DAYS_OF_WEEK = 7;
     int[] specialDiscountDays = {3, 10, 17, 24, 25, 31};
-    static final int SPECIAL_DISCOUNT_PRICE = 1000;
-    static final int CHAMPAGNE_PRICE = 25_000;
-    static final int NO_BENEFIT = 0;
-    static final int SANTA_BADGE_PRICE = 20_000;
-    static final int TREE_BADGE_PRICE = 10_000;
-    static final int STAR_BADGE_PRICE = 5_000;
-    static final int APPLY_EVENT_PRICE = 10_000;
 
     private int visitDate;
     private List<Order> orders;
     private int originalPrice;
     private boolean getChampagne = false;
-    private int champagneBenefit = NO_BENEFIT;
-    private int christmasBenefit = NO_BENEFIT;
+    private int champagneBenefit = Price.NO_BENEFIT.getPrice();
+    private int christmasBenefit = Price.NO_BENEFIT.getPrice();
     boolean isWeekEnd;
-    private int dayBenefit = NO_BENEFIT;
-    private int specialBenefit = NO_BENEFIT;
-
-    private int totalDiscount = NO_BENEFIT;
+    private int dayBenefit = Price.NO_BENEFIT.getPrice();
+    private int specialBenefit = Price.NO_BENEFIT.getPrice();
+    private int totalDiscount = Price.NO_BENEFIT.getPrice();
     private int paymentPrice;
     private String badge;
 
@@ -37,7 +47,7 @@ public class Result {
         this.orders = orders;
         this.originalPrice = calculateOriginalPrice(this.orders);
 
-        if(this.originalPrice >= APPLY_EVENT_PRICE) {
+        if(this.originalPrice >= Price.APPLY_EVENT.getPrice()) {
             this.getChampagne = canGetChampagne(this.originalPrice);
             this.champagneBenefit = calculateChampagneBenefit(this.getChampagne);
 
@@ -70,7 +80,7 @@ public class Result {
     }
 
     private boolean canGetChampagne(int originalPrice) {
-        if (originalPrice >= GET_PRESENT_PRICE) {
+        if (originalPrice >= Price.GET_PRESENT.getPrice()) {
             return true;
         }
         return false;
@@ -78,16 +88,16 @@ public class Result {
 
     private int calculateChampagneBenefit(boolean getChampagne) {
         if (getChampagne) {
-            return CHAMPAGNE_PRICE;
+            return Price.CHAMPAGNE.getPrice();
         }
-        return NO_BENEFIT;
+        return Price.NO_BENEFIT.getPrice();
     }
 
     private int calculateChristmasBenefit(int visitDate) {
         if (visitDate > CHRISTMAS_DAY) {
-            return NO_BENEFIT;
+            return Price.NO_BENEFIT.getPrice();
         }
-        int discountPrice = FIRST_CHRISTMAS_DISCOUNT_PRICE + DAILY_INCREASE_DISCOUNT_PRICE * (visitDate - 1);
+        int discountPrice = Price.FIRST_CHRISTMAS_DISCOUNT.getPrice() + Price.DAILY_INCREASE_DISCOUNT.getPrice() * (visitDate - 1);
         return discountPrice;
     }
 
@@ -130,20 +140,20 @@ public class Result {
     private int calculateSpecialBenefit(int visitDate) {
         for (int day : specialDiscountDays) {
             if (day == visitDate) {
-                return SPECIAL_DISCOUNT_PRICE;
+                return Price.SPECIAL_DISCOUNT.getPrice();
             }
         }
-        return NO_BENEFIT;
+        return Price.NO_BENEFIT.getPrice();
     }
 
     private String calculateBadge(int discountPrice) {
-        if (discountPrice >= SANTA_BADGE_PRICE) {
+        if (discountPrice >= Price.SANTA_BADGE.getPrice()) {
             return "산타";
         }
-        if (discountPrice >= TREE_BADGE_PRICE) {
+        if (discountPrice >= Price.TREE_BADGE.getPrice()) {
             return "트리";
         }
-        if (discountPrice >= STAR_BADGE_PRICE) {
+        if (discountPrice >= Price.STAR_BADGE.getPrice()) {
             return "별";
         }
         return "없음";

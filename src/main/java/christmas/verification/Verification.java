@@ -29,8 +29,6 @@ public class Verification {
     }
 
     public static void verifyOrdersCategory(List<Order> orders) {
-        int noDessert = 0;
-
         for (Order order : orders) {
             String name = order.getName();
             String category = Menu.getCategory(name);

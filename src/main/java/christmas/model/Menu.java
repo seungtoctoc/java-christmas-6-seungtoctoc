@@ -1,7 +1,5 @@
 package christmas.model;
 
-import java.util.List;
-
 public enum Menu {
     APPETIZER1("양송이수프", "에피타이저", 6_000),
     APPETIZER2("타파스", "에피타이저", 5_500),
@@ -16,12 +14,11 @@ public enum Menu {
     DRINK2("레드와인", "음료", 60_000),
     DRINK3("샴페인", "음료", 25_000);
 
-
     private String name;
     private String category;
     private int price;
 
-    private Menu(String name, String category, int price) {
+    Menu(String name, String category, int price) {
         this.name = name;
         this.category = category;
         this.price = price;
@@ -29,9 +26,9 @@ public enum Menu {
 
     public static boolean isInMenu(String name) {
         for (Menu menu : Menu.values()) {
-            String currentName = menu.name;
+            String menuName = menu.name;
 
-            if (currentName.equals(name)){
+            if (menuName.equals(name)){
                 return true;
             }
         }
@@ -40,9 +37,9 @@ public enum Menu {
 
     public static int getPrice(String name) {
         for (Menu menu : Menu.values()) {
-            String currentName = menu.name;
+            String menuName = menu.name;
 
-            if (currentName.equals(name)){
+            if (menuName.equals(name)){
                 return menu.price;
             }
         }

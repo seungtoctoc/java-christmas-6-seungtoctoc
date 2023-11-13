@@ -23,6 +23,7 @@ public class Order {
         }
     }
 
+    // name-number 형식인지 검증
     private void verifyLength(String[] nameAndNumber) {
         if (nameAndNumber.length != 2) {
             throw new IllegalArgumentException(ErrorMessage.getOrderErrorMessage());
