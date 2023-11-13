@@ -16,7 +16,7 @@ public class Verification {
         }
     }
 
-    private void verifyOrdersQuantity(List<Order> orders) {
+    public static void verifyOrdersQuantity(List<Order> orders) {
         int totalQuantity = 0;
 
         for (Order order : orders) {
@@ -28,13 +28,22 @@ public class Verification {
         }
     }
 
-    private void verifyOrdersCategory(List<Order> orders) {
-        
+    public static void verifyOrdersCategory(List<Order> orders) {
+        int noDessert = 0;
+
+        for (Order order : orders) {
+            String name = order.getName();
+            String category = Menu.getCategory(name);
+
+            if (category != "음료") {
+                return;
+            }
+        }
+        throw new IllegalArgumentException(ErrorMessage.getCategoryErrorMessage());
     }
 
     public static void verifyOrders(List<Order> orders) {
-
+        verifyOrdersQuantity(orders);
+        verifyOrdersCategory(orders);
     }
-
-
 }

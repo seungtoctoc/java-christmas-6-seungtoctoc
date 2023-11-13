@@ -1,6 +1,8 @@
 package christmas.model;
 
 import christmas.utility.Utility;
+import christmas.verification.ErrorMessage;
+
 public class Order {
     private String name;
     private int number;
@@ -17,13 +19,13 @@ public class Order {
 
     private void verifyName(String name) {
         if (Menu.isInMenu(name) == false) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.getOrderErrorMessage());
         }
     }
 
     private void verifyLength(String[] nameAndNumber) {
         if (nameAndNumber.length != 2) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.getOrderErrorMessage());
         }
     }
 

@@ -1,7 +1,6 @@
 package christmas.controller;
 
 import christmas.model.Result;
-import christmas.verification.ErrorMessage;
 import christmas.verification.Verification;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -29,7 +28,7 @@ public class Controller {
                 Verification.verifyDate(visitDate);
                 return visitDate;
             } catch (IllegalArgumentException e) {
-                OutputView.printErrorMessage(ErrorMessage.getDateErrorMessage());
+                OutputView.printErrorMessage(e.getMessage());
             }
         }
     }
@@ -38,9 +37,11 @@ public class Controller {
         while (true) {
             try {
                 String orderInput = InputView.readOrder();
-                return makeOrderList(orderInput);
+                List<Order> orders = makeOrderList(orderInput);
+                Verification.verifyOrders(orders);
+                return orders;
             } catch (IllegalArgumentException e) {
-                OutputView.printErrorMessage(ErrorMessage.getOrderErrorMessage());
+                OutputView.printErrorMessage(e.getMessage());
             }
         }
     }

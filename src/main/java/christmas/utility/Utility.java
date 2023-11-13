@@ -1,5 +1,7 @@
 package christmas.utility;
 
+import christmas.verification.ErrorMessage;
+
 import java.text.DecimalFormat;
 
 public class Utility {
@@ -8,7 +10,7 @@ public class Utility {
             return Integer.parseInt(input);
         }
         catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.getNumberErrorMessage());
         }
     }
 
