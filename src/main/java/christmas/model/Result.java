@@ -14,6 +14,8 @@ public class Result {
     static final int CHRISTMAS_DAY = 25;
     int[] specialDiscountDays = {3, 10, 17, 24, 25, 31};
     static final int SPECIAL_DISCOUNT_PRICE = 1000;
+    static final int PRESENT_PRICE = 25_000;
+    static final int NO_DISCOUNT = 0;
 
     private List<Order> orders;
     private int originalPrice;
@@ -24,6 +26,7 @@ public class Result {
     private int specialBenefit;
     private int presentBenefit;
     private int discountPrice;
+    private int paymentPrice;
     private String badge;
 
     public Result(int visitDate, List<Order> orders) {
@@ -34,6 +37,7 @@ public class Result {
         this.isWeekEnd = isWeekEnd(visitDate);
         this.dayBenefit = getDayBenefit(this.isWeekEnd, orders);
         this.specialBenefit = getSpecialBenefit(visitDate);
+        this.presentBenefit = getPresentBenefit(getPresent);
     }
 
     private int getOriginalPrice(List<Order> orders) {
@@ -54,9 +58,16 @@ public class Result {
         return false;
     }
 
+    private int getPresentBenefit(boolean getPresent) {
+        if (getPresent) {
+            return PRESENT_PRICE;
+        }
+        return NO_DISCOUNT;
+    }
+
     private int getChristmasBenefit(int visitDate) {
         if (visitDate > CHRISTMAS_DAY) {
-            return 0;
+            return NO_DISCOUNT;
         }
         int discountPrice = FIRST_CHRISTMAS_DISCOUNT_PRICE + DAILY_INCREASE_DISCOUNT_PRICE * (visitDate - 1);
         return discountPrice;
@@ -104,7 +115,10 @@ public class Result {
                 return SPECIAL_DISCOUNT_PRICE;
             }
         }
+        return NO_DISCOUNT;
+    }
 
-        return 0;
+    private int getDiscountPrice() {
+        return this.christmasBenefit + this.dayBenefit + this.specialBenefit + this.presentBenefit;
     }
 }
