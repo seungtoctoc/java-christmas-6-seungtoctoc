@@ -16,17 +16,21 @@ public class Result {
     static final int SPECIAL_DISCOUNT_PRICE = 1000;
     static final int CHAMPAGNE_PRICE = 25_000;
     static final int NO_BENEFIT = 0;
+    static final int SANTA_BADGE_PRICE = 20_000;
+    static final int TREE_BADGE_PRICE = 10_000;
+    static final int STAR_BADGE_PRICE = 5_000;
+    static final int APPLY_EVENT_PRICE = 10_000;
 
     private List<Order> orders;
     private int originalPrice;
-    private boolean getChampagne;
-    private int champagneBenefit;
-    private int christmasBenefit;
+    private boolean getChampagne = false;
+    private int champagneBenefit = NO_BENEFIT;
+    private int christmasBenefit = NO_BENEFIT;
     boolean isWeekEnd;
-    private int dayBenefit;
-    private int specialBenefit;
+    private int dayBenefit = NO_BENEFIT;
+    private int specialBenefit = NO_BENEFIT;
 
-    private int discountPrice;
+    private int discountPrice = NO_BENEFIT;
     private int paymentPrice;
     private String badge;
 
@@ -34,18 +38,22 @@ public class Result {
         this.orders = orders;
         this.originalPrice = calculateOriginalPrice(this.orders);
 
-        this.getChampagne = canGetChampagne(this.originalPrice);
-        this.champagneBenefit = calculateChampagneBenefit(this.getChampagne);
+        if(this.originalPrice >= APPLY_EVENT_PRICE) {
+            this.getChampagne = canGetChampagne(this.originalPrice);
+            this.champagneBenefit = calculateChampagneBenefit(this.getChampagne);
 
-        this.christmasBenefit = calculateChristmasBenefit(visitDate);
+            this.christmasBenefit = calculateChristmasBenefit(visitDate);
 
-        this.isWeekEnd = isWeekEnd(visitDate);
-        this.dayBenefit = calculateDayBenefit(this.isWeekEnd, this.orders);
+            this.isWeekEnd = isWeekEnd(visitDate);
+            this.dayBenefit = calculateDayBenefit(this.isWeekEnd, this.orders);
 
-        this.specialBenefit = calculateSpecialBenefit(visitDate);
+            this.specialBenefit = calculateSpecialBenefit(visitDate);
 
-        this.discountPrice = this.champagneBenefit + this.christmasBenefit + this.dayBenefit + this.specialBenefit;
+            this.discountPrice = this.champagneBenefit + this.christmasBenefit + this.dayBenefit + this.specialBenefit;
+        }
+
         this.paymentPrice = this.originalPrice - this.discountPrice + this.champagneBenefit;
+        this.badge = calculateBadge(this.discountPrice);
     }
 
     private int calculateOriginalPrice(List<Order> orders) {
@@ -124,4 +132,19 @@ public class Result {
         }
         return NO_BENEFIT;
     }
+
+    private String calculateBadge(int discountPrice) {
+        if (discountPrice >= SANTA_BADGE_PRICE) {
+            return "산타";
+        }
+        if (discountPrice >= TREE_BADGE_PRICE) {
+            return "트리";
+        }
+        if (discountPrice >= STAR_BADGE_PRICE) {
+            return "별";
+        }
+        return "없음";
+    }
+
+    
 }
