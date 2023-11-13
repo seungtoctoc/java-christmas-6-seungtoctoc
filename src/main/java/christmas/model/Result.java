@@ -18,6 +18,7 @@ public class Result {
     static final int STAR_BADGE_PRICE = 5_000;
     static final int APPLY_EVENT_PRICE = 10_000;
 
+    private int visitDate;
     private List<Order> orders;
     private int originalPrice;
     private boolean getChampagne = false;
@@ -32,6 +33,7 @@ public class Result {
     private String badge;
 
     public Result(int visitDate, List<Order> orders) {
+        this.visitDate = visitDate;
         this.orders = orders;
         this.originalPrice = calculateOriginalPrice(this.orders);
 
@@ -141,6 +143,10 @@ public class Result {
             return "별";
         }
         return "없음";
+    }
+
+    public int getVisitDate() {
+        return visitDate;
     }
 
     public List<Order> getOrders() {

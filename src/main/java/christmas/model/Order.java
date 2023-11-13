@@ -9,10 +9,9 @@ public class Order {
         String[] nameAndNumber = order.split("-");
 
         verifyLength(nameAndNumber);
-
         verifyName(nameAndNumber[0]);
-        this.name = nameAndNumber[0];
 
+        this.name = nameAndNumber[0];
         this.number = Utility.getNumberFromString(nameAndNumber[1]);
     }
 

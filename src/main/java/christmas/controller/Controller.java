@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.model.Result;
 import christmas.verification.ErrorMessage;
 import christmas.verification.Verification;
 import christmas.view.InputView;
@@ -16,13 +17,7 @@ public class Controller {
         int visitDate = readVisitDate();
         List<Order> orders = readOrder();
 
-
-        System.out.println(visitDate);
-
-        for(Order order : orders) {
-            System.out.println(order.getName() + " - " +order.getNumber());
-        }
-
+        Result result = new Result(visitDate, orders);
 
     }
 

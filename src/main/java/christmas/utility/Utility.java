@@ -1,6 +1,6 @@
 package christmas.utility;
 
-import christmas.verification.ErrorMessage;
+import java.text.DecimalFormat;
 
 public class Utility {
     public static int getNumberFromString(String input) {
@@ -10,5 +10,11 @@ public class Utility {
         catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public static String getFormattedNumber(int number) {
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        String formattedNumber = decimalFormat.format(number);
+        return formattedNumber;
     }
 }
