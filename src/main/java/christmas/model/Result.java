@@ -14,33 +14,41 @@ public class Result {
     static final int CHRISTMAS_DAY = 25;
     int[] specialDiscountDays = {3, 10, 17, 24, 25, 31};
     static final int SPECIAL_DISCOUNT_PRICE = 1000;
-    static final int PRESENT_PRICE = 25_000;
-    static final int NO_DISCOUNT = 0;
+    static final int CHAMPAGNE_PRICE = 25_000;
+    static final int NO_BENEFIT = 0;
 
     private List<Order> orders;
     private int originalPrice;
-    private boolean getPresent;
+    private boolean getChampagne;
+    private int champagneBenefit;
     private int christmasBenefit;
     boolean isWeekEnd;
     private int dayBenefit;
     private int specialBenefit;
-    private int presentBenefit;
+
     private int discountPrice;
     private int paymentPrice;
     private String badge;
 
     public Result(int visitDate, List<Order> orders) {
         this.orders = orders;
-        this.originalPrice = getOriginalPrice(orders);
-        this.getPresent = canGetPresent(this.originalPrice);
-        this.christmasBenefit = getChristmasBenefit(visitDate);
+        this.originalPrice = calculateOriginalPrice(this.orders);
+
+        this.getChampagne = canGetChampagne(this.originalPrice);
+        this.champagneBenefit = calculateChampagneBenefit(this.getChampagne);
+
+        this.christmasBenefit = calculateChristmasBenefit(visitDate);
+
         this.isWeekEnd = isWeekEnd(visitDate);
-        this.dayBenefit = getDayBenefit(this.isWeekEnd, orders);
-        this.specialBenefit = getSpecialBenefit(visitDate);
-        this.presentBenefit = getPresentBenefit(getPresent);
+        this.dayBenefit = calculateDayBenefit(this.isWeekEnd, this.orders);
+
+        this.specialBenefit = calculateSpecialBenefit(visitDate);
+
+        this.discountPrice = this.champagneBenefit + this.christmasBenefit + this.dayBenefit + this.specialBenefit;
+        this.paymentPrice = this.originalPrice - this.discountPrice + this.champagneBenefit;
     }
 
-    private int getOriginalPrice(List<Order> orders) {
+    private int calculateOriginalPrice(List<Order> orders) {
         int originalPrice = 0;
 
         for (Order order : orders) {
@@ -51,23 +59,23 @@ public class Result {
         return originalPrice;
     }
 
-    private boolean canGetPresent(int originalPrice) {
+    private boolean canGetChampagne(int originalPrice) {
         if (originalPrice >= GET_PRESENT_PRICE) {
             return true;
         }
         return false;
     }
 
-    private int getPresentBenefit(boolean getPresent) {
-        if (getPresent) {
-            return PRESENT_PRICE;
+    private int calculateChampagneBenefit(boolean getChampagne) {
+        if (getChampagne) {
+            return CHAMPAGNE_PRICE;
         }
-        return NO_DISCOUNT;
+        return NO_BENEFIT;
     }
 
-    private int getChristmasBenefit(int visitDate) {
+    private int calculateChristmasBenefit(int visitDate) {
         if (visitDate > CHRISTMAS_DAY) {
-            return NO_DISCOUNT;
+            return NO_BENEFIT;
         }
         int discountPrice = FIRST_CHRISTMAS_DISCOUNT_PRICE + DAILY_INCREASE_DISCOUNT_PRICE * (visitDate - 1);
         return discountPrice;
@@ -84,7 +92,6 @@ public class Result {
                 count++;
             }
         }
-
         return count;
     }
 
@@ -97,7 +104,7 @@ public class Result {
         return false;
     }
 
-    private int getDayBenefit(boolean isWeekEnd, List<Order> orders) {
+    private int calculateDayBenefit(boolean isWeekEnd, List<Order> orders) {
         int count;
 
         if (isWeekEnd == true) {
@@ -109,16 +116,12 @@ public class Result {
         return THIS_YEAR * count;
     }
 
-    private int getSpecialBenefit(int visitDate) {
+    private int calculateSpecialBenefit(int visitDate) {
         for (int day : specialDiscountDays) {
-            if (day == visitDate){
+            if (day == visitDate) {
                 return SPECIAL_DISCOUNT_PRICE;
             }
         }
-        return NO_DISCOUNT;
-    }
-
-    private int getDiscountPrice() {
-        return this.christmasBenefit + this.dayBenefit + this.specialBenefit + this.presentBenefit;
+        return NO_BENEFIT;
     }
 }
