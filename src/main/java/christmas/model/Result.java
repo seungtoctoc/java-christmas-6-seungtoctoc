@@ -1,8 +1,5 @@
 package christmas.model;
 
-import christmas.model.Order;
-import christmas.model.Menu;
-
 import java.util.List;
 
 public class Result {
@@ -146,5 +143,43 @@ public class Result {
         return "없음";
     }
 
-    
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public int getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public boolean isGetChampagne() {
+        return getChampagne;
+    }
+
+    public int getChampagneBenefit() {
+        return champagneBenefit;
+    }
+
+    public int getChristmasBenefit() {
+        return christmasBenefit;
+    }
+
+    public int getDayBenefit() {
+        return dayBenefit;
+    }
+
+    public int getSpecialBenefit() {
+        return specialBenefit;
+    }
+
+    public int getDiscountPrice() {
+        return discountPrice;
+    }
+
+    public int getPaymentPrice() {
+        return paymentPrice;
+    }
+
+    public String getBadge() {
+        return badge;
+    }
 }
