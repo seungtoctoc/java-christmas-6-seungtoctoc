@@ -16,7 +16,7 @@ public class Controller {
         int visitDate = readVisitDate();
         List<Order> orders = readOrder();
 
-        
+
         System.out.println(visitDate);
 
         for(Order order : orders) {

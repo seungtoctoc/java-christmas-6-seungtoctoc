@@ -1,7 +1,5 @@
 package christmas.model;
 
-import java.util.List;
-
 public enum Menu {
     APPETIZER1("양송이수프", "에피타이저", 6_000),
     APPETIZER2("타파스", "에피타이저", 5_500),
